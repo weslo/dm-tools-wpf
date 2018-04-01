@@ -43,8 +43,8 @@
                                         <Grid HorizontalAlignment="Stretch">
 
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="140"/>
-                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="40"/>
                                                 <ColumnDefinition Width="60"/>
                                                 <ColumnDefinition Width="80"/>
                                             </Grid.ColumnDefinitions>
