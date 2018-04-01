@@ -110,6 +110,7 @@
                 </Grid>
             </TabItem>
 
+            <!-- Encounter Tab -->
             <TabItem Header="Encounter">
                 <Grid>
 
@@ -118,6 +119,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
+                    <!-- Monster Manifest -->
                     <DockPanel>
                         <Label DockPanel.Dock="Top" Content="Monsters"/>
                         <ScrollViewer>
