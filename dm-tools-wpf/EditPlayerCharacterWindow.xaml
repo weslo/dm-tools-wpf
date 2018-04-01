@@ -7,18 +7,33 @@
         mc:Ignorable="d"
         Title="EditPlayerCharacterWindow" Height="100" Width="400">
     <Grid>
-        <StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Name"/>
-                <TextBox Text="{Binding Name, Mode=TwoWay}"/>
-            </StackPanel>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="2"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+        </Grid.Resources>
 
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Level"/>
-                <TextBox Text="{Binding Level, Mode=TwoWay}"/>
-            </StackPanel>
-            
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Name:"/>
+        <TextBox Grid.Column="1" Text="{Binding Name, Mode=TwoWay}"/>
+        
+        <Label Grid.Row="1" Content="Level:"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Level, Mode=TwoWay}"/>
+        
     </Grid>
 </Window>
