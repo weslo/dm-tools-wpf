@@ -40,7 +40,11 @@ namespace DMTools
         {
             Button button = sender as Button;
             PlayerCharacter pc = button.DataContext as PlayerCharacter;
-            MessageBox.Show(pc.Name);
+            var pcWindow = new EditPlayerCharacterWindow
+            {
+                DataContext = pc
+            };
+            pcWindow.Show();
         }
     }
 }
