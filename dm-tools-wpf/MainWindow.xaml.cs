@@ -46,5 +46,25 @@ namespace DMTools
             };
             pcWindow.Show();
         }
+
+        // Called when a player character remove button is clicked.
+        private void PlayerCharacterRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            PlayerCharacter pc = button.DataContext as PlayerCharacter;
+            encounter.PlayerCharacters.Remove(pc);
+        }
+
+        // Called whe nthe player character add button is clicked.
+        private void PlayerCharacterAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            PlayerCharacter pc = new PlayerCharacter();
+            encounter.PlayerCharacters.Add(pc);
+            var pcWindow = new EditPlayerCharacterWindow
+            {
+                DataContext = pc
+            };
+            pcWindow.Show();
+        }
     }
 }
