@@ -42,7 +42,7 @@ namespace DMTools
             set
             {
                 _level = value;
-                    NotifyPropertyChanged();
+                NotifyPropertyChanged();
             }
         }
     }
