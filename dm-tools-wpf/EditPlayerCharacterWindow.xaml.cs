@@ -14,9 +14,7 @@ using System.Windows.Shapes;
 
 namespace DMTools
 {
-    /// <summary>
-    /// Interaction logic for EditPlayerCharacterWindow.xaml
-    /// </summary>
+    // Interaction logic for edit player window.
     public partial class EditPlayerCharacterWindow : Window
     {
         // Default constructor.

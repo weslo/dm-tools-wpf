@@ -4,14 +4,10 @@ using System.Collections.Specialized;
 
 namespace DMTools.Data
 {
-    /// <summary>
-    /// Observable collection that emits changed events when the properties of its contents notify of changes.
-    /// </summary>
+    // Observable collection that emits changed events when the properties of its contents notify of changes.
     public class PropertyObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Called when the collection notifies of a change.
-        /// </summary>
+        // Called when the collection notifies of a change.
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             // Remove event listeners from old items.
@@ -33,10 +29,8 @@ namespace DMTools.Data
             }
             base.OnCollectionChanged(e);
         }
-
-        /// <summary>
-        /// Handler for when an item property changes.
-        /// </summary>
+        
+        // Handler for when an item property changes.
         private void OnItemPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));

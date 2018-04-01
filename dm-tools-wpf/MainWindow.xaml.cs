@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace DMTools
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    // Interaction logic for main window.
     public partial class MainWindow : Window
     {
         // Encounter object that acts as data context.
@@ -58,8 +56,13 @@ namespace DMTools
         // Called whe nthe player character add button is clicked.
         private void PlayerCharacterAddButton_Click(object sender, RoutedEventArgs e)
         {
-            PlayerCharacter pc = new PlayerCharacter();
+            var pc = new PlayerCharacter
+            {
+                Name = "New Player Character",
+                Level = 1
+            };
             encounter.PlayerCharacters.Add(pc);
+
             var pcWindow = new EditPlayerCharacterWindow
             {
                 DataContext = pc
