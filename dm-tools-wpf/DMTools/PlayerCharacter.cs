@@ -41,8 +41,11 @@ namespace DMTools
             }
             set
             {
-                _level = value;
-                NotifyPropertyChanged();
+                if(_level != value)
+                {
+                    _level = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
     }
