@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using DMTools.Data;
 
 namespace DMTools
 {
@@ -21,10 +10,19 @@ namespace DMTools
         // Encounter object that acts as data context.
         Encounter encounter = new Encounter();
 
+        // Monster manual data.
+        MonsterManifest monsterManual;
+
         // Default constructor.
         public MainWindow()
         {
             InitializeComponent();
+
+            // Load monster manual data and insert into monsters list.
+            monsterManual = MonsterManifest.LoadFromFile("Resources/monster-manual.json");
+            itemsControlMonsterManifest.ItemsSource = monsterManual.MonsterDefinitions;
+
+            // Initialize encounter as data context.
             this.DataContext = encounter;
             encounter.PlayerCharacters.Add(new PlayerCharacter
             {

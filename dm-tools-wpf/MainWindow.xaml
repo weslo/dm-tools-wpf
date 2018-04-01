@@ -111,7 +111,41 @@
             </TabItem>
 
             <TabItem Header="Encounter">
-                
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel>
+                        <Label DockPanel.Dock="Top" Content="Monsters"/>
+                        <ScrollViewer>
+                            <ItemsControl x:Name="itemsControlMonsterManifest">
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+                                            <TextBlock Text="{Binding ChallengeRating, Mode=OneWay}" Grid.Column="1"/>
+                                            <Button Content="Add" Grid.Column="2"/>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+                    
+                </Grid>
             </TabItem>
             
         </TabControl>
