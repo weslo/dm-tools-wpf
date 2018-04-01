@@ -5,55 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DMTools"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    
-    <Grid VerticalAlignment="Stretch">
+        Title="Encounter Designer" Height="450" Width="800">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+    <DockPanel VerticalAlignment="Stretch">
 
-        <StackPanel Grid.Column="0">
-            <Label Content="Player Character Levels"/>
-            <ListBox
-                    ItemsSource="{Binding PlayerCharacters}"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Stretch">
+        <TabControl DockPanel.Dock="Top">
+            <TabItem Header="Players">
+
+                <Grid
+                    DockPanel.Dock="Left"
+                    VerticalAlignment="Stretch">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Grid.Row="0">
+                        <Label DockPanel.Dock="Top"  Content="Player Characters"/>
+                        <ScrollViewer>
+                            <ItemsControl
+                                ItemsSource="{Binding PlayerCharacters}"
+                                Padding="4"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch">
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid HorizontalAlignment="Stretch">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="140"/>
+                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="80"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+                                            <TextBlock Text="{Binding Level, Mode=OneWay}" Grid.Column="1"/>
+                                            <Button Content="Edit" Grid.Column="2" Click="PlayerCharacterEditButton_Click"/>
+                                            <Button Content="Remove" Grid.Column="3" Click="PlayerCharacterRemoveButton_Click"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+
+                    <StackPanel Grid.Row="1">
+
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Stretch">
+                            <Button Content="Add Player Character" Click="PlayerCharacterAddButton_Click"/>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Average Player Level:"/>
+                            <TextBlock Text="{Binding AveragePlayerLevel, Mode=OneWay}"/>
+                        </StackPanel>
+                        
+                    </StackPanel>
+
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Encounter">
                 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch">
-                            
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="40"/>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="100"/>
-                            </Grid.ColumnDefinitions>
-
-                            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
-                            <TextBlock Text="{Binding Level, Mode=OneWay}" Grid.Column="1"/>
-                            <Button Content="Edit" Grid.Column="2" Click="PlayerCharacterEditButton_Click"/>
-                            <Button Content="Remove" Grid.Column="3" Click="PlayerCharacterRemoveButton_Click"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                
-            </ListBox>
-
-            <StackPanel
-                Orientation="Horizontal"
-                HorizontalAlignment="Stretch">
-                <Button Content="Add" Click="PlayerCharacterAddButton_Click"/>
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Average Player Level:"/>
-                <TextBlock Text="{Binding AveragePlayerLevel, Mode=OneWay}"/>
-            </StackPanel>
-        </StackPanel>
-    </Grid>
+            </TabItem>
+            
+        </TabControl>
+    </DockPanel>
 </Window>
