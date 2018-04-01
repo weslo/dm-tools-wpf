@@ -31,11 +31,29 @@ namespace DMTools
             {
                 return _averagePlayerLevel;
             }
-            set
+            private set
             {
                 if(_averagePlayerLevel != value)
                 {
                     _averagePlayerLevel = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        // The XP thresholds for this encounter.
+        private int[] _experienceThresholds;
+        public int[] ExperienceThresholds
+        {
+            get
+            {
+                return _experienceThresholds;
+            }
+            private set
+            {
+                if(_experienceThresholds != value)
+                {
+                    _experienceThresholds = value;
                     NotifyPropertyChanged();
                 }
             }
@@ -50,15 +68,37 @@ namespace DMTools
         // Called when the PlayerCharacters collection changes.
         private void OnPlayerCharactersChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // Recalculate average player level.
+            // Prepare to recalculate player data.
             var pcs = sender as ObservableCollection<PlayerCharacter>;
+
+            // Count player levels.
             int totalPlayerLevel = 0;
-            foreach(PlayerCharacter pc in pcs)
+
+            // Measure XP threshold for each difficulty.
+            var difficulties = Enum.GetValues(typeof(EncounterDifficulty)) as EncounterDifficulty[];
+            int[] experienceThresholds = new int[difficulties.Length];
+
+            // Do math on each player's data.
+            foreach (PlayerCharacter pc in pcs)
             {
+
+                // Update total level.
                 totalPlayerLevel += pc.Level;
+
+                // Update XP threshold.
+                foreach(var difficulty in difficulties)
+                {
+                    int experienceThreshold = EncounterBalanceData.GetExperienceThreshold(pc.Level, difficulty);
+                    experienceThresholds[(int)difficulty] += experienceThreshold;
+                }
             }
+
+            // Recalculate average player level.
             double preciseAveragePlayerLevel = (double)totalPlayerLevel / pcs.Count;
             AveragePlayerLevel = (int)Math.Round(preciseAveragePlayerLevel);
+
+            // Update experience thresholds.
+            ExperienceThresholds = experienceThresholds;
         }
     }
 }

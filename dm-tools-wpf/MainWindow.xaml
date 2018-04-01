@@ -10,6 +10,8 @@
     <DockPanel VerticalAlignment="Stretch">
 
         <TabControl DockPanel.Dock="Top">
+            
+            <!-- Players Tab -->
             <TabItem Header="Players">
 
                 <Grid
@@ -26,6 +28,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
+                    <!-- Player Characters List -->
                     <DockPanel Grid.Row="0">
                         <Label DockPanel.Dock="Top"  Content="Player Characters"/>
                         <ScrollViewer>
@@ -68,6 +71,7 @@
 
                     </StackPanel>
 
+                    <!-- Player Characters Stats -->
                     <StackPanel Grid.Column="1">
 
                         <StackPanel Orientation="Horizontal">
@@ -75,6 +79,32 @@
                             <TextBlock Text="{Binding AveragePlayerLevel, Mode=OneWay}"/>
                         </StackPanel>
                         
+                        <GroupBox Header="XP Thresholds by Encounter Difficulty">
+                            <StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Easy:"/>
+                                    <TextBlock Text="{Binding ExperienceThresholds[0]}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Medium:"/>
+                                    <TextBlock Text="{Binding ExperienceThresholds[1]}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Hard:"/>
+                                    <TextBlock Text="{Binding ExperienceThresholds[2]}"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="Deadly:"/>
+                                    <TextBlock Text="{Binding ExperienceThresholds[3]}"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </GroupBox>
+
                     </StackPanel>
 
                 </Grid>

@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="DMTools\Data\PropertyObservableCollection.cs" />
     <Compile Include="DMTools\Encounter.cs" />
+    <Compile Include="DMTools\EncounterBalanceData.cs" />
     <Compile Include="EditPlayerCharacterWindow.xaml.cs">
       <DependentUpon>EditPlayerCharacterWindow.xaml</DependentUpon>
     </Compile>
