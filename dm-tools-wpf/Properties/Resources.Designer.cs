@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace dm_tools_wpf.Properties
+namespace DMTools.Properties
 {
 
 
