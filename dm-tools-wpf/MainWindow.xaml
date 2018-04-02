@@ -121,7 +121,7 @@
 
                     <!-- Monster Manifest -->
                     <DockPanel>
-                        <Label DockPanel.Dock="Top" Content="Monsters"/>
+                        <Label DockPanel.Dock="Top" Content="Monster Definitions"/>
                         <ScrollViewer>
                             <ItemsControl x:Name="itemsControlMonsterManifest">
 
@@ -137,7 +137,7 @@
 
                                             <TextBlock Text="{Binding Name, Mode=OneWay}"/>
                                             <TextBlock Text="{Binding ChallengeRating, Mode=OneWay}" Grid.Column="1"/>
-                                            <Button Content="Add" Grid.Column="2"/>
+                                            <Button Content="Add" Grid.Column="2" Click="MonstersAddButton_Click"/>
 
                                         </Grid>
                                     </DataTemplate>
@@ -146,7 +146,36 @@
                             </ItemsControl>
                         </ScrollViewer>
                     </DockPanel>
-                    
+
+                    <!-- Monsters In Encounter -->
+                    <DockPanel Grid.Column="1">
+                        <Label DockPanel.Dock="Top" Content="Monsters in Encounter"/>
+                        <ScrollViewer>
+                            <ItemsControl
+                                ItemsSource="{Binding Monsters}">
+
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{Binding Name, Mode=OneWay}"/>
+                                            <TextBlock Text="{Binding ChallengeRating, Mode=OneWay}" Grid.Column="1"/>
+                                            <Button Content="Remove" Grid.Column="2" Click="MonstersRemoveButton_Click"/>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </DockPanel>
+
                 </Grid>
             </TabItem>
             

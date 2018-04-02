@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace DMTools.Data
+namespace DMTools.Model
 {
     // Observable collection that emits changed events when the properties of its contents notify of changes.
     public class PropertyObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged

@@ -69,9 +69,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DMTools\Data\PropertyObservableCollection.cs" />
+    <Compile Include="DMTools\Model\PropertyObservableCollection.cs" />
+    <Compile Include="DMTools\Model\PropertyObservableObject.cs" />
     <Compile Include="DMTools\Encounter.cs" />
-    <Compile Include="DMTools\EncounterBalanceData.cs" />
+    <Compile Include="DMTools\Data\EncounterBalanceData.cs" />
     <Compile Include="DMTools\Data\MonsterManifest.cs" />
     <Compile Include="EditPlayerCharacterWindow.xaml.cs">
       <DependentUpon>EditPlayerCharacterWindow.xaml</DependentUpon>

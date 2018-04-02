@@ -1,4 +1,4 @@
-﻿using DMTools.Data;
+﻿using DMTools.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -8,13 +8,13 @@ using System.Runtime.CompilerServices;
 namespace DMTools
 {
     // Manages data for a single encounter.
-    public class Encounter : INotifyPropertyChanged
+    public class Encounter : PropertyObservableObject
     {
-        // Notify property changed.
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        // Carries data about a cluster of a single monster definition in an encounter.
+        public class MonsterCluster : PropertyObservableObject
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            public int id;
+            public int count;
         }
 
         // List of players in the encounter.
@@ -22,6 +22,12 @@ namespace DMTools
         {
             get;
         } = new PropertyObservableCollection<PlayerCharacter>();
+
+        // List of monster clusters in the encounter.
+        public PropertyObservableCollection<MonsterDefinition> Monsters
+        {
+            get;
+        } = new PropertyObservableCollection<MonsterDefinition>();
 
         // The average level of the players in the encounter.
         private int _averagePlayerLevel;

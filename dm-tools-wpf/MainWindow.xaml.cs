@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using DMTools.Data;
 
 namespace DMTools
 {
@@ -51,7 +50,7 @@ namespace DMTools
             encounter.PlayerCharacters.Remove(pc);
         }
 
-        // Called whe nthe player character add button is clicked.
+        // Called when the player character add button is clicked.
         private void PlayerCharacterAddButton_Click(object sender, RoutedEventArgs e)
         {
             var pc = new PlayerCharacter
@@ -66,6 +65,22 @@ namespace DMTools
                 DataContext = pc
             };
             pcWindow.Show();
+        }
+
+        // Called when the monsters add button is clicked.
+        private void MonstersAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            MonsterDefinition monster = button.DataContext as MonsterDefinition;
+            encounter.Monsters.Add(monster);
+        }
+
+        // Called when the monsters remove button is clicked.
+        private void MonstersRemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            MonsterDefinition monster = button.DataContext as MonsterDefinition;
+            encounter.Monsters.Remove(monster);
         }
     }
 }
