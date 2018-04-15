@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using DMTools.Utilities;
 
 namespace DMTools
 {
@@ -40,6 +41,62 @@ namespace DMTools
         {
             var rewards = Application.Current.Resources["ExperienceRewardsByChallengeRating"] as ResourceDictionary;
             return (int)rewards[challengeRating];
+        }
+
+        // Return the experience multiplier for a given number of encounter participants.
+        public static int GetExperienceMultiplier(int numPlayers, int numMonsters)
+        {
+            // Handle weird base case.
+            if (numMonsters <= 0)
+            {
+                return 0;
+            }
+
+            // Determine experience multiplier tier.
+            int multiplierTier;
+            if(numMonsters == 1)
+            {
+                multiplierTier = 1;
+            }
+            else if(numMonsters == 2)
+            {
+                multiplierTier = 2;
+            }
+            else if(numMonsters <= 6)
+            {
+                multiplierTier = 3;
+            }
+            else if(numMonsters <= 10)
+            {
+                multiplierTier = 4;
+            }
+            else if(numMonsters <= 14)
+            {
+                multiplierTier = 5;
+            }
+            else
+            {
+                multiplierTier = 6;
+            }
+
+            // Adjust multiplier tier for the number of players.
+            if(numPlayers < 3)
+            {
+                multiplierTier++;
+            }
+            else if(numPlayers > 5)
+            {
+                multiplierTier--;
+            }
+
+            // Clamp to defined bounds.
+            var multipliers = Application.Current.Resources["ExperienceRewardMultipliers"] as ResourceDictionary;
+            int minTier = (int)multipliers["CONST_MIN_TIER"];
+            int maxTier = (int)multipliers["CONST_MAX_TIER"];
+            multiplierTier = multiplierTier.Clamp(minTier, maxTier);
+
+            // Get experience multiplier
+            return (int)multipliers[multiplierTier.ToString()];
         }
     }
 }

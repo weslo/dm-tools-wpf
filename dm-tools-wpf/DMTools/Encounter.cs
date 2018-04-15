@@ -151,6 +151,12 @@ namespace DMTools
             {
                 totalXp += EncounterBalanceData.GetExperienceReward(monster.ChallengeRating);
             }
+
+            // Apply experience adjustments.
+            int multiplier = EncounterBalanceData.GetExperienceMultiplier(PlayerCharacters.Count, monsters.Count);
+            totalXp = totalXp * multiplier / 100;
+
+            // Apply total experience reward.
             TotalExperienceReward = totalXp;
 
             // Reevaluate the difficulty of the encounter.
