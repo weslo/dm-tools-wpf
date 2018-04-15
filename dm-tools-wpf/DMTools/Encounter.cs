@@ -2,21 +2,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace DMTools
 {
     // Manages data for a single encounter.
     public class Encounter : PropertyObservableObject
     {
-        // Carries data about a cluster of a single monster definition in an encounter.
-        public class MonsterCluster : PropertyObservableObject
-        {
-            public int id;
-            public int count;
-        }
-
         // List of players in the encounter.
         public PropertyObservableCollection<PlayerCharacter> PlayerCharacters
         {
@@ -65,10 +57,47 @@ namespace DMTools
             }
         }
 
+        // The difficulty of the encounter.
+        private EncounterDifficulty _difficulty;
+        public EncounterDifficulty Difficulty
+        {
+            get
+            {
+                return _difficulty;
+            }
+            private set
+            {
+                if(_difficulty != value)
+                {
+                    _difficulty = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        // The total experience awarded for this encounter.
+        private int _totalExperienceReward;
+        public int TotalExperienceReward
+        {
+            get
+            {
+                return _totalExperienceReward;
+            }
+            private set
+            {
+                if(_totalExperienceReward != value)
+                {
+                    _totalExperienceReward = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         // Default constructor.
         public Encounter()
         {
             PlayerCharacters.CollectionChanged += OnPlayerCharactersChanged;
+            Monsters.CollectionChanged += OnMonstersChanged;
         }
 
         // Called when the PlayerCharacters collection changes.
@@ -105,6 +134,49 @@ namespace DMTools
 
             // Update experience thresholds.
             ExperienceThresholds = experienceThresholds;
+
+            // Reevaluate the difficulty of the encounter.
+            RecalculateDifficulty();
+        }
+
+        // Called when the Monsters collection changes.
+        private void OnMonstersChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            // Prepare to recalculate monster data.
+            var monsters = sender as ObservableCollection<MonsterDefinition>;
+
+            // Recalulate total xp.
+            int totalXp = 0;
+            foreach(MonsterDefinition monster in monsters)
+            {
+                totalXp += EncounterBalanceData.GetExperienceReward(monster.ChallengeRating);
+            }
+            TotalExperienceReward = totalXp;
+
+            // Reevaluate the difficulty of the encounter.
+            RecalculateDifficulty();
+        }
+
+        // Recalculate the difficulty of the encounter.
+        private void RecalculateDifficulty()
+        {
+            int difficultyIndex = 0;
+            for(int i = 0; i < ExperienceThresholds.Length; i++)
+            {
+                // Check if reward exceeds threshold.
+                int xpThreshold = ExperienceThresholds[i];
+                if(TotalExperienceReward >= xpThreshold)
+                {
+                    difficultyIndex = i;
+                }
+
+                // Otherwise exit loop early.
+                else
+                {
+                    i = ExperienceThresholds.Length;
+                }
+            }
+            Difficulty = (EncounterDifficulty)difficultyIndex;
         }
     }
 }

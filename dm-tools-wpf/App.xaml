@@ -4,8 +4,16 @@
              xmlns:local="clr-namespace:DMTools"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/ExperienceRewardsByChallengeRating.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

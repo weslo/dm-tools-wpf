@@ -149,10 +149,31 @@
 
                     <!-- Monsters In Encounter -->
                     <DockPanel Grid.Column="1">
+
+                        <StackPanel DockPanel.Dock="Top">
+
+                            <GroupBox Header="Encounter Data">
+                                <StackPanel>
+                                    
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Difficulty:"/>
+                                        <TextBlock Text="{Binding Difficulty}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Total Experience Reward:"/>
+                                        <TextBlock Text="{Binding TotalExperienceReward}"/>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </GroupBox>
+                            
+                        </StackPanel>
+
                         <Label DockPanel.Dock="Top" Content="Monsters in Encounter"/>
                         <ScrollViewer>
                             <ItemsControl
-                                ItemsSource="{Binding Monsters}">
+                            ItemsSource="{Binding Monsters}">
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -174,6 +195,7 @@
 
                             </ItemsControl>
                         </ScrollViewer>
+
                     </DockPanel>
 
                 </Grid>

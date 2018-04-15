@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 
 namespace DMTools
 {
@@ -37,6 +33,13 @@ namespace DMTools
         public static int GetExperienceThreshold(int level, EncounterDifficulty difficulty)
         {
             return xpThresholdMatrix[level, (int)difficulty];
+        }
+
+        // Get the experience reward for the specified challenge rating.
+        public static int GetExperienceReward(string challengeRating)
+        {
+            var rewards = Application.Current.Resources["ExperienceRewardsByChallengeRating"] as ResourceDictionary;
+            return (int)rewards[challengeRating];
         }
     }
 }
