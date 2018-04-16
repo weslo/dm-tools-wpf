@@ -166,6 +166,11 @@
                                         <TextBlock Text="{Binding TotalExperienceReward}"/>
                                     </StackPanel>
 
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Experience Reward Per Player:"/>
+                                        <TextBlock Text="{Binding ExperiencePerPlayer}"/>
+                                    </StackPanel>
+
                                 </StackPanel>
                             </GroupBox>
                             

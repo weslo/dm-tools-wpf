@@ -93,6 +93,24 @@ namespace DMTools
             }
         }
 
+        // The experience awarded to each player character.
+        private int _experiencePerPlayer;
+        public int ExperiencePerPlayer
+        {
+            get
+            {
+                return _experiencePerPlayer;
+            }
+            set
+            {
+                if(_experiencePerPlayer != value)
+                {
+                    _experiencePerPlayer = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         // Default constructor.
         public Encounter()
         {
@@ -136,30 +154,15 @@ namespace DMTools
             ExperienceThresholds = experienceThresholds;
 
             // Reevaluate the difficulty of the encounter.
+            RecalculateExperienceReward();
             RecalculateDifficulty();
         }
 
         // Called when the Monsters collection changes.
         private void OnMonstersChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // Prepare to recalculate monster data.
-            var monsters = sender as ObservableCollection<MonsterDefinition>;
-
-            // Recalulate total xp.
-            int totalXp = 0;
-            foreach(MonsterDefinition monster in monsters)
-            {
-                totalXp += EncounterBalanceData.GetExperienceReward(monster.ChallengeRating);
-            }
-
-            // Apply experience adjustments.
-            int multiplier = EncounterBalanceData.GetExperienceMultiplier(PlayerCharacters.Count, monsters.Count);
-            totalXp = totalXp * multiplier / 100;
-
-            // Apply total experience reward.
-            TotalExperienceReward = totalXp;
-
-            // Reevaluate the difficulty of the encounter.
+            // Reevaluate this encounter.
+            RecalculateExperienceReward();
             RecalculateDifficulty();
         }
 
@@ -183,6 +186,25 @@ namespace DMTools
                 }
             }
             Difficulty = (EncounterDifficulty)difficultyIndex;
+        }
+
+        // Recalculate the experience reward for this encounter.
+        private void RecalculateExperienceReward()
+        {
+            // Recalulate total xp.
+            int totalXp = 0;
+            foreach (MonsterDefinition monster in Monsters)
+            {
+                totalXp += EncounterBalanceData.GetExperienceReward(monster.ChallengeRating);
+            }
+
+            // Apply experience adjustments.
+            int multiplier = EncounterBalanceData.GetExperienceMultiplier(PlayerCharacters.Count, Monsters.Count);
+            totalXp = totalXp * multiplier / 100;
+
+            // Apply total experience reward.
+            TotalExperienceReward = totalXp;
+            ExperiencePerPlayer = PlayerCharacters.Count > 0 ? TotalExperienceReward / PlayerCharacters.Count : 0;
         }
     }
 }
