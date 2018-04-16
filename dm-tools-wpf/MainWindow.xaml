@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DMTools"
+        xmlns:localData="clr-namespace:DMTools.Data"
         mc:Ignorable="d"
         Title="Encounter Designer" Height="450" Width="800">
 
@@ -178,6 +179,40 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Grid>
+
+                                            <Grid.Resources>
+                                                <localData:ChallengeRatingComparisonConverter x:Key="ChallengeRatingComparisonConverter"/>
+                                            </Grid.Resources>
+
+                                            <Grid.Style>
+                                                <Style TargetType="Grid">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Value="True">
+                                                            <DataTrigger.Binding>
+                                                                <MultiBinding Converter="{StaticResource ChallengeRatingComparisonConverter}" Mode="OneTime">
+                                                                    <Binding Path="ChallengeRating"/>
+                                                                    <Binding Path="DataContext.AveragePlayerLevel" 
+                                                                             RelativeSource="{RelativeSource FindAncestor,
+                                                                                AncestorType={x:Type Window}}"/>
+                                                                </MultiBinding>
+                                                            </DataTrigger.Binding>
+                                                            <DataTrigger.Setters>
+                                                                <Setter Property="Background" Value="Yellow"/>
+                                                                <Setter Property="ToolTip">
+                                                                    <Setter.Value>
+                                                                        <ToolTip>
+                                                                            <DockPanel>
+                                                                                <Label>This monster could kill one of the player characters in one attack.</Label>
+                                                                            </DockPanel>
+                                                                        </ToolTip>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger.Setters>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                    <Setter Property="Background" Value="White"/>
+                                                </Style>
+                                            </Grid.Style>
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>

@@ -77,6 +77,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DMTools\Data\ChallengeRatingComparisonConverter.cs" />
     <Compile Include="DMTools\Model\PropertyObservableCollection.cs" />
     <Compile Include="DMTools\Model\PropertyObservableObject.cs" />
     <Compile Include="DMTools\Encounter.cs" />
