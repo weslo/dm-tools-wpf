@@ -1,6 +1,9 @@
 # DM Tools for Windows
 Personal D&amp;D 5E tools for dungeon masters built in WPF.
 
+- C#/WPF
+- Visual Studio 2017
+
 ## Player Characters
 
 - Add your party of player characters:
