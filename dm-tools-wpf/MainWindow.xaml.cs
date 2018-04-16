@@ -23,10 +23,27 @@ namespace DMTools
 
             // Initialize encounter as data context.
             this.DataContext = encounter;
+
+            // Add a bunch of premade characters.
             encounter.PlayerCharacters.Add(new PlayerCharacter
             {
-                Name = "Caden Sunwalker",
-                Level = 4
+                Name = "Arthas Menethil",
+                Level = 5
+            });
+            encounter.PlayerCharacters.Add(new PlayerCharacter
+            {
+                Name = "Jaina Proudmoore",
+                Level = 5
+            });
+            encounter.PlayerCharacters.Add(new PlayerCharacter
+            {
+                Name = "Illidan Stormrage",
+                Level = 5
+            });
+            encounter.PlayerCharacters.Add(new PlayerCharacter
+            {
+                Name = "Thrall",
+                Level = 5
             });
         }
 
